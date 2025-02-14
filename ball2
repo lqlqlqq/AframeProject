@@ -1,0 +1,39 @@
+class Ball{
+  constructor(){
+    this.obj = document.createElement("a-sphere");
+    this.obj.setAttribute("radius",0.015);
+    this.obj.setAttribute("color","gold");
+    this.obj.setAttribute("position",{x:0, y:0, z:0});
+    scene.append(this.obj)
+	
+	let theta = camera.obj.object3D.rotation.y + Math.PI;
+    let phi = camera.obj.object3D.rotation.x;
+    let v = 0.1
+    let v_xz = v * Math.cos(phi);
+    this.dz = v_xz * Math.cos(theta);
+    this.dx = v_xz * Math.sin(theta);
+    this.dy = v * Math.sin(phi);
+  }
+  move(){
+    if(this.fire){
+		this.obj.object3D.position.x += this.dx;
+		this.obj.object3D.position.y += this.dy;
+		this.obj.object3D.position.z += this.dz; 
+      this.obj.setAttribute("position",{x:this.x, y:this.y, z:this.z});
+    }else{
+      this.obj.setAttribute("opacity",0);
+    }
+    
+  }
+  shoot(){
+    this.fire = true;
+    this.obj.setAttribute("opacity",1);
+    this.x = camera.obj.object3D.position.x;
+    this.y = camera.obj.object3D.position.y;
+    this.z = camera.obj.object3D.position.z;
+
+    let angle = camera.obj.object3D.rotation.y + Math.PI;
+    this.dx = Math.sin(angle) / 2;
+    this.dz = Math.cos(angle) / 2;
+  }
+}

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://aframe.io/releases/1.4.1/aframe.min.js"></script>
+    <title>A-Frame Ball Flying</title>
+  </head>
+  <body>
+    <a-scene>
+      <!-- 摄像机和光源 -->
+      <a-entity id="camera" camera wasd-controls position="0 1.6 0" look-controls></a-entity>
+      <a-light type="directional" position="1 1 1"></a-light>
+
+      <!-- 球 -->
+      <a-sphere id="ball" position="0 1.6 -2" radius="0.2" color="red"></a-sphere>
+
+      <!-- 地面 -->
+      <a-plane rotation="-90 0 0" width="10" height="10" color="#7BC8A4"></a-plane>
+    </a-scene>
+
+    <script>
+      // 获取摄像机和球的引用
+      const camera = document.querySelector("#camera");
+      const ball = document.querySelector("#ball");
+
+      // 监听鼠标左键点击事件
+      window.addEventListener("mousedown", (event) => {
+        if (event.button === 0) { // 0 表示左键
+          // 获取摄像机朝向
+          const cameraDirection = new THREE.Vector3();
+          camera.object3D.getWorldDirection(cameraDirection);
+
+          // 设置球的飞行速度
+          const ballSpeed = 5; // 球的速度
+          const velocity = cameraDirection.multiplyScalar(ballSpeed);
+
+          // 动态更新球的位置
+          let ballPosition = ball.object3D.position.clone();
+          const interval = setInterval(() => {
+            ballPosition.add(velocity.clone().multiplyScalar(0.01)); // 每帧更新位置
+            ball.object3D.position.set(ballPosition.x, ballPosition.y, ballPosition.z);
+
+            // 停止条件：当球飞得太远时
+            if (ballPosition.length() > 50) {
+              clearInterval(interval);
+            }
+          }, 10);
+        }
+      });
+    </script>
+  </body>
+</html>
