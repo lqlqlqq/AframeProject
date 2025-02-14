@@ -18,7 +18,7 @@ window.onload = function(){
   Score_text = document.getElementById("score");
   ctwinimg = document.getElementById("ctwin");
   twinimg = document.getElementById("twin");
-
+  akaudio = document.getElementById("aksound");
 //Multiplayer
 /*
   socket = io.connect(`https://382160f0-fd62-4223-aac1-8cda05275f2d-00-1ina3ca78ser1.riker.replit.dev/?player_id=${my_id}&player_color=${my_color}`);
@@ -39,6 +39,7 @@ window.onload = function(){
   window.addEventListener("click",function(){
 	  console.log(dart);
 	  if(fire) Fire();
+    akaudio.play();
 	})
   
   window.addEventListener("keypress",function(e){
