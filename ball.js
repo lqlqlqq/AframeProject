@@ -17,6 +17,7 @@ class Ball{
     this.obj.setAttribute("position",{x:this.x, y:this.y, z:this.z});
 	this.obj.addEventListener("click",()=>{
 		this.obj.setAttribute("opacity","0");
+		aimlabaudio.play();
     })
     scene.append(this.obj);
   }

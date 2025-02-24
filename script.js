@@ -19,6 +19,7 @@ window.onload = function(){
   ctwinimg = document.getElementById("ctwin");
   twinimg = document.getElementById("twin");
   akaudio = document.getElementById("aksound");
+  aimlabaudio = document.getElementById("aimlabsound");
 //Multiplayer
 /*
   socket = io.connect(`https://382160f0-fd62-4223-aac1-8cda05275f2d-00-1ina3ca78ser1.riker.replit.dev/?player_id=${my_id}&player_color=${my_color}`);
@@ -39,7 +40,7 @@ window.onload = function(){
   window.addEventListener("click",function(){
 	  console.log(dart);
 	  if(fire) Fire();
-    akaudio.play();
+	  if(fire) akaudio.play();
 	})
   
   window.addEventListener("keypress",function(e){
@@ -62,7 +63,6 @@ window.onload = function(){
 		fire = true;
 	  }
   })
-  
 	let bot = new Bot(20, 1.1, -4.6);
 	bots.push(bot);
 	
